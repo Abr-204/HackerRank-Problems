@@ -1,0 +1,51 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <stack>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int Q;
+    if (!(cin >> Q)) return 0;
+
+    string s = "";
+    stack<string> history;
+
+    while (Q--) {
+        int type;
+        cin >> type;
+
+        if (type == 1) {
+            string w;
+            cin >> w;
+            history.push(s);
+            s += w;
+        } 
+        else if (type == 2) {
+            int k;
+            cin >> k;
+            history.push(s);
+            if (k <= (int)s.size()) s.erase(s.size() - k);
+            else s.clear();
+        } 
+        else if (type == 3) {
+            int k;
+            cin >> k;
+            if (k >= 1 && k <= (int)s.size()) cout << s[k - 1] << '\n';
+        } 
+        else if (type == 4) {
+            if (!history.empty()) {
+                s = history.top();
+                history.pop();
+            }
+        }
+    }   
+    return 0;
+}
