@@ -1,0 +1,42 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include<queue>
+#include<unordered_map>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int q;
+    cin >> q;
+
+    priority_queue<int, vector<int>, greater<int>> minHeap; 
+    unordered_map<int, int> freq;
+
+    while (q--) {
+        int type;
+        cin >> type;
+
+        if (type == 1) {
+            int x;
+            cin >> x;
+            minHeap.push(x);
+        }
+        else if (type == 2) {
+            int x;
+            cin >> x;
+            freq[x]++; 
+        }
+        else if (type == 3) {
+            while (!minHeap.empty() && freq[minHeap.top()] > 0) {
+                freq[minHeap.top()]--;
+                minHeap.pop();
+            }
+            cout << minHeap.top() << "\n";
+        }
+    }   
+    return 0;
+}
